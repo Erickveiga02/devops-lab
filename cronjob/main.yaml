@@ -1,0 +1,18 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: exemplo-cronjob
+spec:
+  schedule: "*/1 * * * *"   # sintaxe cron (aqui: todo minuto)
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: exemplo
+              image: busybox
+              args:
+                - /bin/sh
+                - -c
+                - "echo 'Executando CronJob em $(date)'"
+          restartPolicy: OnFailure
